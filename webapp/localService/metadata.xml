@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="http://rg1.realcore.local:8100/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='AR1')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="xRCESxI_S4HSUMEFFORT_CDS" xml:lang="en" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="xRCESxI_S4HSumEffortType" sap:label="Effort CDS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false" sap:label="Check GUID" sap:quickinfo="GUID für Checks - RAW16"/>
+                <Property Name="Objekttyp" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Typ-ID" sap:quickinfo="Code Inspector: Objekttyp"/>
+                <Property Name="Objektname" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Objektname" sap:quickinfo="Objektname im Objektkatalog"/>
+                <Property Name="Devclass" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Paket"/>
+                <Property Name="ErrorClass" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Prüfklasse" sap:quickinfo="Code Inspector: Name einer Prüfklasse"/>
+                <Property Name="ErrorNumber" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Meldungscode" sap:quickinfo="Code Inspector: Kennung für Meldungscode"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status" sap:quickinfo="Status des Checks"/>
+                <Property Name="effort" Type="Edm.Int32" sap:label="Aufwand" sap:quickinfo="Numerischer Aufwandswert"/>
+                <NavigationProperty Name="to_Rules" Relationship="xRCESxI_S4HSUMEFFORT_CDS.assoc_F40E4220A658DD60265CC3CF5D1946FE" FromRole="FromRole_assoc_F40E4220A658DD60265CC3CF5D1946FE" ToRole="ToRole_assoc_F40E4220A658DD60265CC3CF5D1946FE"/>
+            </EntityType>
+            <EntityType Name="xRCESxI_S4HTCRulesType" sap:label="Test 6" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CheckVariante"/>
+                    <PropertyRef Name="ErrorClass"/>
+                    <PropertyRef Name="ErrorNumber"/>
+                </Key>
+                <Property Name="CheckVariante" Type="Edm.String" Nullable="false" MaxLength="30" sap:display-format="UpperCase" sap:label="Prüfvariante" sap:quickinfo="Code Inspector: Prüfvarianten"/>
+                <Property Name="ErrorClass" Type="Edm.String" Nullable="false" MaxLength="30" sap:display-format="UpperCase" sap:label="Prüfklasse" sap:quickinfo="Code Inspector: Name einer Prüfklasse"/>
+                <Property Name="ErrorNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Meldungscode" sap:quickinfo="Code Inspector: Kennung für Meldungscode"/>
+                <Property Name="ConverterClass" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Converter-Klasse" sap:quickinfo="Converter-Klasse für automatische Quellcode-Anpassung"/>
+                <Property Name="Active" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Activeflag"/>
+                <Property Name="Effortrules" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Aufwand" sap:quickinfo="Aufwandswert"/>
+                <Property Name="efforttime" Type="Edm.Int32" sap:label="Aufwand" sap:quickinfo="Numerischer Aufwandswert"/>
+            </EntityType>
+            <Association Name="assoc_F40E4220A658DD60265CC3CF5D1946FE" sap:content-version="1">
+                <End Type="xRCESxI_S4HSUMEFFORT_CDS.xRCESxI_S4HSumEffortType" Multiplicity="1" Role="FromRole_assoc_F40E4220A658DD60265CC3CF5D1946FE"/>
+                <End Type="xRCESxI_S4HSUMEFFORT_CDS.xRCESxI_S4HTCRulesType" Multiplicity="*" Role="ToRole_assoc_F40E4220A658DD60265CC3CF5D1946FE"/>
+            </Association>
+            <EntityContainer Name="xRCESxI_S4HSUMEFFORT_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="xRCESxI_S4HSumEffort" EntityType="xRCESxI_S4HSUMEFFORT_CDS.xRCESxI_S4HSumEffortType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="xRCESxI_S4HTCRules" EntityType="xRCESxI_S4HSUMEFFORT_CDS.xRCESxI_S4HTCRulesType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_F40E4220A658DD60265CC3CF5D1946FE" Association="xRCESxI_S4HSUMEFFORT_CDS.assoc_F40E4220A658DD60265CC3CF5D1946FE" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="xRCESxI_S4HSumEffort" Role="FromRole_assoc_F40E4220A658DD60265CC3CF5D1946FE"/>
+                    <End EntitySet="xRCESxI_S4HTCRules" Role="ToRole_assoc_F40E4220A658DD60265CC3CF5D1946FE"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://rg1.realcore.local:8100/sap/opu/odata/RCES/I_S4HSUMEFFORT_CDS/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link rel="latest-version" href="http://rg1.realcore.local:8100/sap/opu/odata/RCES/I_S4HSUMEFFORT_CDS/$metadata"
+                    xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

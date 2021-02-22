@@ -1,0 +1,38 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ns.Sum_Effort_Fiori.controller.View1" displayBlock="true">
+	<Shell id="shell">
+		<App id="app" pages="{/xRCESxI_S4HSumEffort}">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+					    <Table noDataText="Drop column list items here and columns in the area above" id="table1">
+					        <items>
+					            <ColumnListItem type="Active" id="item2">
+					                <cells>
+					                    <Text text="{Devclass}" id="text6"/>
+					                    <Text text="{Objekttyp}" id="text7"/>
+					                    <Text text="{Objektname}" id="text8"/></cells>
+					            </ColumnListItem>
+					        </items>
+                    
+					        <columns>
+					            <Column id="column3">
+					                <header>
+					                    <Label text="Paket" id="label3"/>
+					                </header>
+					            </Column>
+					            <Column id="column4">
+					                <header>
+					                    <Label text="Objekttyp" id="label4"/>
+					                </header>
+					            </Column>
+					            <Column id="column5">
+					                <header>
+					                    <Label text="Objekt Name" id="label5"/>
+					                </header>
+					            </Column></columns></Table>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
